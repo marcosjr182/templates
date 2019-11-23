@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { Template } from './interfaces/template.interface';
 import { CreateTemplateDto } from './dto/create-template.dto';
 import { ListTemplatesDto } from './dto/list-templates.dto';
+import { UpdateTemplateDto } from './dto/update-template.dto';
 
 @Injectable()
 export class TemplatesService {
@@ -19,5 +20,9 @@ export class TemplatesService {
 
   async findAll(listTemplatesDto: ListTemplatesDto): Promise<Template[]> {
     return await this.model.find(listTemplatesDto).exec();
+  }
+
+  async update(version: string, template: UpdateTemplateDto): Promise<Template> {
+    return await this.model.findOneAndUpdate({ version }, template, { new: true }).exec();
   }
 }
