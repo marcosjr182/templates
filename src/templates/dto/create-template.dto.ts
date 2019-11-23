@@ -1,4 +1,4 @@
-import { IsNumberString, IsString, IsOptional, ValidateNested, IsEnum, IsNotEmpty, IsNotEmptyObject } from 'class-validator';
+import { IsString, IsOptional, ValidateNested, IsNotEmpty, IsNotEmptyObject } from 'class-validator';
 import { TemplateComponent, TemplateInfo } from '../interfaces/template.interface';
 
 export class CreateTemplateDto {
