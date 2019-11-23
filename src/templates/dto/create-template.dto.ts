@@ -6,7 +6,8 @@ export class CreateTemplateDto {
   @IsOptional()
   readonly description: string;
   
-  @IsNumberString()
+  @IsString()
+  @IsNotEmpty()
   readonly version: string;
   
   @IsString()
