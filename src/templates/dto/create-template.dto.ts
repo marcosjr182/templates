@@ -5,11 +5,11 @@ export class CreateTemplateDto {
   @IsString()
   @IsOptional()
   readonly description: string;
-  
+
   @IsString()
   @IsNotEmpty()
   readonly version: string;
-  
+
   @IsString()
   @IsNotEmpty()
   readonly status: string;
