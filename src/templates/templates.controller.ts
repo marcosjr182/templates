@@ -19,8 +19,16 @@ export class TemplatesController {
     return this.service.create(template);
   }
 
+  @Get(':version')
+  findOne(@Param('version') version: string) {
+    return this.service.findOne(version);
+  }
+
   @Put(':version')
-  update(@Param('version') version: string, @Body() template: UpdateTemplateDto) {
+  update(
+    @Param('version') version: string,
+    @Body() template: UpdateTemplateDto,
+  ) {
     return this.service.update(version, template);
   }
 }

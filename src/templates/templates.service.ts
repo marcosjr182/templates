@@ -9,7 +9,7 @@ import { UpdateTemplateDto } from './dto/update-template.dto';
 
 @Injectable()
 export class TemplatesService {
-  
+
   constructor(
     @InjectModel('Template') private readonly model: Model<Template>
   ) {}
@@ -19,10 +19,36 @@ export class TemplatesService {
   }
 
   async findAll(listTemplatesDto: ListTemplatesDto): Promise<Template[]> {
-    return await this.model.find(listTemplatesDto).exec();
+    return await this.model
+      .find(this.queryTransformer(listTemplatesDto))
+      .exec();
+  }
+
+  async findOne(version: string): Promise<Template> {
+    return await this.model.findOne({ version }).exec();
   }
 
   async update(version: string, template: UpdateTemplateDto): Promise<Template> {
-    return await this.model.findOneAndUpdate({ version }, template, { new: true }).exec();
+    return await this.model
+      .findOneAndUpdate({ version }, template, { new: true })
+      .exec();
+  }
+
+  private queryTransformer(dto: any) {
+    const { client, campaign, ...query } = dto;
+    if (!client && !campaign) {
+      return query;
+    }
+
+    const customQuery = {};
+    if (client && client !== '') {
+      customQuery['info.client'] = client;
+    }
+
+    if (campaign && campaign !== '') {
+      customQuery['info.campaign'] = client;
+    }
+
+    return { ...query, ...customQuery };
   }
 }
