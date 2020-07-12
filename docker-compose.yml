@@ -16,5 +16,3 @@ services:
       - /usr/src/app/node_modules
     env_file:
       - ./apps/templates/.env
-    # depends_on:
-      # - mysql
