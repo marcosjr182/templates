@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  templates-api:
+    image: templates-api
+    container_name: templates-api
+    command: npm run start:dev
+    user: 'node'
+    build:
+      context: .
+      dockerfile: ./apps/templates/Dockerfile
+      target: development
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file:
+      - ./apps/templates/.env
+    # depends_on:
+      # - mysql
